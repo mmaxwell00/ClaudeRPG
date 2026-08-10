@@ -8,9 +8,14 @@ containerized, single-player to start.
 
 ## Status
 
-Early planning/scaffolding stage. See [`ARCHITECTURE.md`](./ARCHITECTURE.md)
-for the full design and the staged roadmap (section 13). Track progress with a
-`STATUS.md` or a GitHub Projects board, one card per stage.
+**Design stage — no code yet.** The design is settled and written down; the
+implementation has not started.
+
+- [`ARCHITECTURE.md`](./ARCHITECTURE.md) — full design, invariants, and the
+  staged roadmap (section 13)
+- [`STATUS.md`](./STATUS.md) — stage tracking and open decisions
+
+The repo is **private**. See **Content & IP** below for why that matters.
 
 ## Prerequisites
 
@@ -22,38 +27,61 @@ for the full design and the staged roadmap (section 13). Track progress with a
 
 ## Quick Start
 
+There isn't one yet — there is no `docker-compose.yml` and no application code.
+Once Stage 2 lands ([`STATUS.md`](./STATUS.md)), it will be:
+
 ```bash
-# clone the repo, then:
-cp .env.example .env       # fill in DB creds, Drive credentials, etc.
+cp .env.example .env       # then fill it in — see the comments in that file
 docker compose up --build
 ```
 
-Frontend: http://localhost:3000
-Backend API: http://localhost:8000
+Frontend on `:3000`, backend API on `:8000`.
 
-Note: on macOS, Docker Model Runner executes chat/embedding/image models as a
-host-native process (Metal GPU access), not inside a container. This is
-expected — see `ARCHITECTURE.md` section 6.
+Note: on macOS, Docker Model Runner executes chat and embedding models as a
+host-native process (for Metal GPU access), not inside a container. This is
+expected, and it means the containerized backend has to reach *out* to the
+host — the most likely thing to break during setup. See
+[`ARCHITECTURE.md`](./ARCHITECTURE.md) section 6.2.
 
 ## Project Structure (planned)
 
+Only the documentation and config files at the root exist today.
+
 ```
 .
-├── frontend/          # React/Next.js client
-├── backend/           # FastAPI app (rules engine, orchestration, API)
-├── content-pipeline/  # PDF ingestion → structured rules + embeddings
+├── frontend/          # Next.js client
+├── backend/           # FastAPI: rules engine, orchestration, API
+├── content-pipeline/  # PDF ingestion → structured rules + embeddings (offline)
+├── data/
+│   ├── homebrew/      # committed — original content
+│   ├── schema/        # committed — our own schemas
+│   └── derived/       # GITIGNORED — book-derived rules data
+├── private/           # GITIGNORED — your PDFs and anything derived from them
 ├── docker-compose.yml
 ├── ARCHITECTURE.md
-└── STATUS.md          # stage tracking
+└── STATUS.md
 ```
 
 ## Content & IP
 
-Rifts is copyrighted Palladium Books IP. This project is for personal use
-against PDF material already purchased. No official Palladium text is
-committed to this repo — only original/homebrew content and code. See
-`ARCHITECTURE.md` section 14.
+Rifts and the Palladium Megaversal system are copyrighted by Palladium Books.
+This project is for personal use with PDF material already purchased. Only code,
+schemas, and original/homebrew content are committed.
+
+Two things make that more than a promise:
+
+1. The repo is **private**.
+2. The rule is enforced mechanically, not by remembering — `.gitignore` now, plus
+   a pre-commit hook and a CI check before the content pipeline is built. Anything
+   that came from a book lives under a gitignored path, with no exceptions and no
+   judgement calls at commit time.
+
+Note that a structured extraction of a stat block is still a derivative of the
+book's expression, so book-derived *rules data* is treated as licensed material
+too — not just the prose. See [`ARCHITECTURE.md`](./ARCHITECTURE.md) section 14.
 
 ## License
 
-TBD — pick a license once you decide whether/how this will ever be shared.
+None — all rights reserved by default, which is the right posture while the repo
+is private. If this is ever shared, the shared artifact is code plus schemas plus
+homebrew, never data: a recipient supplies their own PDFs. See section 14.5.
