@@ -28,6 +28,7 @@ Nothing is implemented yet. Stage 0 is complete; Stage 1 has not started.
 - [x] `.env.example`
 - [x] `ARCHITECTURE.md`
 - [x] `STATUS.md`
+- [x] Project renamed to **ClaudeRPG** — repo, local clone, README, and architecture doc now agree (2026-08-10)
 - [ ] Pre-commit hook rejecting PDFs / derived paths / oversized files (§14.2 layer 2)
 - [ ] CI check duplicating the hook's assertions (§14.2 layer 3)
 - [ ] License decision — currently unlicensed / all-rights-reserved, which is correct while private (§14.5)
@@ -46,5 +47,11 @@ architecture doc when each is settled, not here.
 | Postgres + pgvector, or SQLite + `sqlite-vec`? | §8 | Postgres assumed. SQLite is viable and drops a container; migration cost rises after Stage 2. |
 | Chat model choice | §6.3 | Pick for tool-calling reliability over prose quality. |
 | Embedding model choice | §6.3, §9.3 | Locked in once the corpus is built — changing it forces a full re-embed. |
-| Project name | — | Repo is `RPG_SciFi`, README says "Rifts LLM Game", GitHub description says "SciFi based game". Three identities; pick one. |
 | Cloud escalation for narration | §6.4 | Deferred. Note it is a §14 question first: escalating means sending licensed passages to a third party. |
+
+## Settled
+
+| Decision | When | Outcome |
+|---|---|---|
+| Repo visibility | 2026-08-10 | **Private.** Settled before any pipeline code exists, so licensed material was never at risk of a public commit (§14.4). |
+| Project name | 2026-08-10 | **ClaudeRPG.** Previously three identities — repo `RPG_SciFi`, README "Rifts LLM Game", description "SciFi based game". GitHub repo, local clone (`~/ClaudeRPG`), README, and `ARCHITECTURE.md` now all agree. |

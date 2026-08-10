@@ -1,10 +1,8 @@
-# Rifts LLM Game (working title)
+# ClaudeRPG
 
 An LLM-driven, character-creation-first game set in Palladium's Rifts universe,
 built from purchased Rifts PDF material. Runs locally on Docker Model Runner,
 containerized, single-player to start.
-
-> Working title — rename freely once you land on something you like.
 
 ## Status
 

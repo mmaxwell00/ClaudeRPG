@@ -1,4 +1,4 @@
-# Architecture — Rifts LLM Game
+# Architecture — ClaudeRPG
 
 Status: **design document, pre-code.** Nothing in this repo is implemented yet.
 This file is the contract that the implementation must satisfy; where it says
