@@ -1,0 +1,97 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# IP CONTAINMENT — see ARCHITECTURE.md §14
+#
+# Licensed Palladium material and anything derived from it must never be
+# committed. These rules exist so that forgetting is safe. Do not add
+# exceptions; if something here needs committing, the layout is wrong.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Source PDFs and everything derived from them
+private/
+*.pdf
+*.epub
+*.mobi
+*.cbz
+*.cbr
+
+# Book-derived rules data (homebrew and schemas ARE committed — see §14.3)
+data/derived/
+!data/homebrew/
+!data/schema/
+
+# Retrieval corpus, chunk caches, embeddings, vector dumps
+corpus/
+chunks/
+embeddings/
+*.faiss
+*.usearch
+*.npy
+*.safetensors
+*.gguf
+
+# Pipeline scratch and extraction intermediates
+content-pipeline/out/
+content-pipeline/work/
+content-pipeline/.cache/
+*.extracted.json
+*.extracted.txt
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Secrets and local config
+# ─────────────────────────────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+service-account*.json
+token.json
+gdrive-*.json
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Python
+# ─────────────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Node / frontend
+# ─────────────────────────────────────────────────────────────────────────────
+node_modules/
+.next/
+out/
+.turbo/
+*.tsbuildinfo
+npm-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Databases and local state
+# ─────────────────────────────────────────────────────────────────────────────
+*.sqlite
+*.sqlite3
+*.db
+pgdata/
+postgres-data/
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Editors and OS
+# ─────────────────────────────────────────────────────────────────────────────
+.DS_Store
+.idea/
+.vscode/
+*.swp
