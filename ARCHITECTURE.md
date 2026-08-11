@@ -547,9 +547,12 @@ none is "build the framework."
 
 ### Stage 0 — Repo hygiene ✅
 
-Private repo, `.gitignore` with the IP guard, `.env.example`, this document,
-`STATUS.md`. **Ships before any pipeline code exists**, so there is never a
-window where licensed material could be committed by accident.
+`.gitignore` with the IP guard, `.env.example`, this document, `STATUS.md`.
+**Ships before any pipeline code exists**, so there is never a window where
+licensed material could be committed by accident.
+
+The repo is **public**, which makes the remaining guard layers in §14.2 a
+prerequisite for Stage 4 rather than a nicety — see §14.4.
 
 ### Stage 1 — Rules engine skeleton, no LLM
 
@@ -623,8 +626,9 @@ Only code, schemas, and original content are committed.
 
 ### 14.2 Mechanical enforcement
 
-Policy fails to the extent it depends on remembering. Three layers, each of which
-must be in place before Stage 4:
+Policy fails to the extent it depends on remembering. Three layers, all of which
+**must be in place before Stage 4** — the first stage where licensed material
+exists on disk:
 
 1. **`.gitignore`** — `private/`, `data/derived/`, `*.pdf`, corpus and vector
    artifacts. Shipped in Stage 0.
@@ -634,6 +638,13 @@ must be in place before Stage 4:
 3. **CI check** — the same assertions, so a bypassed hook is still caught.
 
 The design goal is that forgetting is safe.
+
+Because the repo is public (§14.4), layers 2 and 3 are load-bearing rather than
+defence in depth. A mistaken commit here is not a local problem to be quietly
+amended away: it is published the moment it is pushed, and a force-push does not
+reliably unpublish it — the objects remain reachable through the API, and
+anything that has been cloned or indexed is gone for good. Treat the gap between
+now and Stage 4 as the window in which layers 2 and 3 must close.
 
 ### 14.3 Directory contract
 
@@ -649,15 +660,33 @@ exceptions and no judgement calls at commit time.
 
 ### 14.4 Distribution
 
-The repo is **private** (made so before this document landed). If it is ever
-shared, the shared artifact is code plus schemas plus homebrew — never data. A
-recipient supplies their own PDFs and runs their own pipeline. That is the
-property that keeps this personal use rather than redistribution, and it is worth
-preserving even when sharing seems harmless.
+The repo is **public**. The published artifact is code plus schemas plus
+homebrew — **never data**. A recipient supplies their own PDFs and runs their own
+pipeline against them. That separation is the whole basis on which this remains
+personal use rather than redistribution, and public visibility makes it the
+project's single most important invariant rather than a private preference.
+
+The history was audited before the repo was published: eight blobs across three
+commits, all documentation, no PDFs, no derived paths, no credentials. It went
+public clean.
+
+What changes going forward is the cost of a mistake, not the rule. Previously a
+bad commit was recoverable in private; now it is a publication. Hence §14.2's
+insistence that layers 2 and 3 land before any licensed material touches disk.
+
+A useful test for any future change: **if someone clones this repo, they must not
+be able to play Rifts with it.** If a change would make that false, the change is
+wrong regardless of how convenient it is.
 
 ### 14.5 Licensing
 
-The repo has no license, so it is all-rights-reserved by default — which is the
-correct posture and should stay that way while it is private. An open-source
-license would only ever apply to the code and schemas, and choosing one before
-§14.4's separation is actually enforced in the build would be premature.
+The repo has **no license**, so it is all-rights-reserved by default. That was
+the correct posture while private; now that it is public it is a holding
+position, and one worth resolving deliberately — public visibility grants no
+reuse rights, so the current state means anyone can read the code but nobody may
+legally use it.
+
+Whatever is chosen applies to **code, schemas, and homebrew only.** No license
+this project grants can convey any right to Palladium's material, and the
+LICENSE file should say so explicitly to avoid implying otherwise. Choosing one
+is tracked in `STATUS.md`.

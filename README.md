@@ -13,7 +13,8 @@ implementation has not started.
   staged roadmap (section 13)
 - [`STATUS.md`](./STATUS.md) — stage tracking and open decisions
 
-The repo is **private**. See **Content & IP** below for why that matters.
+The repo is **public**, and contains no Palladium-owned material. See
+**Content & IP** below for how that stays true.
 
 ## Prerequisites
 
@@ -66,20 +67,24 @@ Rifts and the Palladium Megaversal system are copyrighted by Palladium Books.
 This project is for personal use with PDF material already purchased. Only code,
 schemas, and original/homebrew content are committed.
 
-Two things make that more than a promise:
-
-1. The repo is **private**.
-2. The rule is enforced mechanically, not by remembering — `.gitignore` now, plus
-   a pre-commit hook and a CI check before the content pipeline is built. Anything
-   that came from a book lives under a gitignored path, with no exceptions and no
-   judgement calls at commit time.
+This repo is **public**, so that rule is enforced mechanically rather than by
+remembering: `.gitignore` today, plus a pre-commit hook and a CI check that must
+land before the content pipeline is built. Anything that came from a book lives
+under a gitignored path — no exceptions, no judgement calls at commit time.
 
 Note that a structured extraction of a stat block is still a derivative of the
 book's expression, so book-derived *rules data* is treated as licensed material
-too — not just the prose. See [`ARCHITECTURE.md`](./ARCHITECTURE.md) section 14.
+too, not just the prose. See [`ARCHITECTURE.md`](./ARCHITECTURE.md) section 14.
+
+**If you clone this, you get code, schemas, and homebrew only.** There is no
+Rifts content here and there never will be. Bring your own purchased PDFs and run
+your own pipeline; the repo is useless for playing Rifts without the books, which
+is deliberate.
 
 ## License
 
-None — all rights reserved by default, which is the right posture while the repo
-is private. If this is ever shared, the shared artifact is code plus schemas plus
-homebrew, never data: a recipient supplies their own PDFs. See section 14.5.
+**Undecided — currently all rights reserved by default.** Public visibility is
+not a license: without one, nobody may reuse this code, which is fine as a
+holding position but worth resolving now that the repo is visible. Whatever is
+chosen applies to code, schemas, and homebrew only — never to data. See
+[`ARCHITECTURE.md`](./ARCHITECTURE.md) section 14.5.
